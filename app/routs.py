@@ -1,7 +1,7 @@
 from flask import render_template
 from app import app
 from app.fake_data import site_menu
-from app.fake_data import catalog
+from app.fake_data import catalog, get_product_by_id
 
 
 @app.route("/")
@@ -23,15 +23,14 @@ def products(category: str = "all"):
 
 
 @app.route("/product/<int:id>")
-def get_product():
-    return render_template("products.html", title="{{}}", menu_list=site_menu)
+def get_product(id: int):
+    product = get_product_by_id(id)
+    title = f"{product['brand']}/{product['title']}"
+    return render_template(
+        "product.html", title=title, menu_list=site_menu, product=product
+    )
 
 
 @app.route("/about")
 def about():
-    pass
-
-
-@app.route("/contacts")
-def contacts():
-    pass
+    return render_template("about.html", title="О компании", menu_list=site_menu)

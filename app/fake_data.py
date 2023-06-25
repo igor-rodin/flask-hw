@@ -9,7 +9,6 @@ site_menu = [
         ],
     },
     {"name": "о нас", "url": "about"},
-    {"name": "контакты", "url": "contacts"},
 ]
 
 catalog = {
@@ -132,3 +131,10 @@ catalog = {
         ],
     },
 }
+
+
+def get_product_by_id(id: int) -> dict:
+    for value in catalog.values():
+        for item in value["items"]:
+            if item["id"] == id:
+                return item
