@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<section class="content products">
+    <div class="center">
+        <div class="products-content">
+            <h2 class="products__title">{{title}}</h2>
+
+            {% for category in products %}
+            <h3 class="product-category">{{ category['title'] }}</h3>
+            <div class="products__catalog catalog">
+                {% for product in category['items'] %}
+                <article class="product">
+                    <div class="product__image-wrapper">
+                        <img src="{{ url_for('static', filename=product.image_url) }}" alt="" class="product__img">
+                        <div class="product-to-cart">
+                            <a class="product-to-cart__button"
+                                href="{{ url_for('get_product', id = product.id)}}">Подробнее</a>
+                        </div>
+                    </div>
+                    <h4 class="product__title"> {{product.brand }} </h4>
+                    <div class="product__text">
+                        <p>{{product.title}}</p>
+                    </div>
+                    <div class="product__rating">{{product.rating}}</div>
+                    <div class="product__price">{{product.price}} &#x20bd;</div>
+                </article>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<section class="content product-info">
+    <div class="center">
+        <div class="product-content">
+            <h2 class="products__title products__title_info">{{title}}</h2>
+
+            <article class="product-card">
+                <div class="product__image-wrapper">
+                    <img src="{{ url_for('static', filename=product.image_url) }}" alt="" class="product__img">
+                </div>
+                <div class="product-card__content">
+                    <h4 class="product__title"> {{product.brand }} </h4>
+                    <div class="product__text">
+                        <p>{{product.title}}</p>
+                    </div>
+                    <div class="product__rating">{{product.rating}}</div>
+                    <div class="product__price">{{product.price}} &#x20bd;</div>
+                    <div class="product__description">
+                        <div class="product__description-title">Описание</div>
+                        <p>{{product.description}}</p>
+                    </div>
+                    <button class="products__button product-card__content-card">Купить</button>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+{% endblock %}
