@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, make_response
 from app import app
 
 
@@ -29,3 +29,32 @@ def pow2():
             category=category,
         )
     return render_template("lesson-2/pow2.html", caption="Квадрат числа")
+
+
+@app.route("/lesson_2/login/", methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+        name = request.form.get("name")
+        email = request.form.get("email")
+        response = make_response(redirect(url_for("welcome")))
+        response.set_cookie("user_data", f"{name}:{email}")
+        return response
+    return render_template("lesson-2/login.html", caption="Регистрация")
+
+
+@app.route("/lesson_2/welcome/")
+def welcome():
+    user_data = request.cookies.get("user_data")
+    if user_data:
+        user_name, email = user_data.split(":")
+        return render_template(
+            "lesson-2/welcome.html", user={"name": user_name, "email": email}
+        )
+    return redirect(url_for("login"))
+
+
+@app.route("/lesson_2/logout/")
+def logout():
+    response = make_response(redirect(url_for("login")))
+    response.set_cookie("user_data", "", expires=0)
+    return response
