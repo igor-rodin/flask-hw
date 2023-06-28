@@ -6,7 +6,14 @@ from app.fake_data import catalog, get_product_by_id
 
 @app.route("/")
 def index():
-    return render_template("index.html", title="Главная", menu_list=site_menu)
+    return render_template(
+        "index.html", caption="Фреймворки Flask и FastAPI (семинары)"
+    )
+
+
+@app.route("/shop")
+def shop():
+    return render_template("shop.html", title="Главная", menu_list=site_menu)
 
 
 @app.route("/products/")
@@ -34,3 +41,10 @@ def get_product(id: int):
 @app.route("/about")
 def about():
     return render_template("about.html", title="О компании", menu_list=site_menu)
+
+
+# @app.route("/lesson-2")
+# def lesson_2():
+#     return render_template(
+#         "lesson-2/lesson-2.html", caption="Урок 2. Погружение во Flask"
+#     )

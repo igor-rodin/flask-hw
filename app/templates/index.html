@@ -1,16 +1,10 @@
-{% extends 'base.html' %}
+{% extends 'base_bs.html' %}
 
-{% block content %}
-<section class="content hero">
-    <div class="center">
-        <div class="hero-content">
-            <img class="hero-content__image" src="{{ url_for('static', filename='./img/bg_hero.webp') }}"
-                alt="hero image">
-            <h2 class="hero-content__title title">
-                <span class="title__upper">the brand</span>
-                <span class="title__down">модной&nbsp;<span class="title__down_accent">одежды</span></span>
-            </h2>
-        </div>
-    </div>
-</section>
+{% block content%}
+<div class="row col-12">
+    <h1 class="h1 text-center m-3">{{caption}}</h1>
+    <a href="{{url_for('shop')}}" class="list-group-item link-primary fs-3">Урок 1 (шаблон магазина)</a>
+    <a href="{{url_for('lesson_2')}}" class="list-group-item link-primary fs-3">Урок 2 (погружение во Flask
+        )</a>
+</div>
 {% endblock %}
