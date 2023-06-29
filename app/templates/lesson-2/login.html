@@ -1,0 +1,16 @@
+{% extends 'base_bs.html' %}
+
+{% block content%}
+<div class="row mt-4">
+    <a href="{{url_for('lesson_2')}}" class="link-primary">Назад (к уроку 2)</a>
+</div>
+<div class="row mw-75 text-center">
+    <h1 class="h1  m-4">{{caption}}</h1>
+    <form class="col-6  mx-auto" action="{{url_for('login')}}" method="post">
+        <input class="form-control mb-3" type="text" name="name" placeholder="Имя" required>
+        <input class="form-control mb-3" type="email" name="email" placeholder="Email" required>
+        <button class="btn btn-outline-success" type="submit">Зарегистрироваться</button>
+        <a class="btn btn-outline-success" href="{{url_for('welcome')}}">Уже зарегистирован</a>
+    </form>
+</div>
+{% endblock %}
