@@ -8,12 +8,19 @@
 
 1. Установка
 
-```bash
-   pip instal -r requirements
-```
+   ```bash
+      pip instal -r requirements
+   ```
 
-1. Запуск
+2. Создание и заполнение базы данных
 
-```bash
-   flask run [--debug]
-```
+   ```bash
+      flask init-db
+      flask fill-students-db
+   ```
+
+3. Запуск сервера
+
+   ```bash
+      flask run [--debug]
+   ```

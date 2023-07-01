@@ -1,11 +1,5 @@
 from app import db
 
-# student_mark = db.Table(
-#     "student_mark",
-#     db.Column("student_id", db.Integer, db.ForeignKey("student.id")),
-#     db.Column("mark_id", db.Integer, db.ForeignKey("mark.id")),
-# )
-
 
 class Student(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

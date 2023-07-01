@@ -12,7 +12,10 @@ def lesson_3():
 
 @app.route("/lesson-3/students/")
 def students():
-    pass
+    students = db.session.scalars(db.select(Student)).all()
+    return render_template(
+        "lesson-3/students.html", caption="Список студентов", students=students
+    )
 
 
 @app.route("/lesson-3/register", methods=["GET", "POST"])
@@ -27,8 +30,8 @@ def init_db():
     print("Ok")
 
 
-@app.cli.command("fill-db")
-def fill_db():
+@app.cli.command("fill-students-db")
+def fill_students_db():
     student_1 = Student(
         first_name="Иванов", last_name="Иванов", email="ivan@example.com", group=24
     )
@@ -54,13 +57,13 @@ def fill_db():
     mark_4 = Mark(class_name="История", value=4, student=student_4)
     mark_5 = Mark(class_name="История", value=5, student=student_3)
     mark_6 = Mark(class_name="История", value=5, student=student_5)
-    mark_7 = Mark(class_name="Химия", value=4, studen=student_1)
+    mark_7 = Mark(class_name="Химия", value=4, student=student_1)
     mark_8 = Mark(class_name="Химия", value=3, student=student_2)
     mark_9 = Mark(class_name="Химия", value=5, student=student_6)
-    mark_10 = Mark(class_name="Биология", value=3, studen=student_1)
+    mark_10 = Mark(class_name="Биология", value=3, student=student_1)
     mark_11 = Mark(class_name="Биология", value=4, student=student_2)
     mark_12 = Mark(class_name="Биология", value=4, student=student_6)
-    mark_13 = Mark(class_name="Общая физика", value=4, studen=student_1)
+    mark_13 = Mark(class_name="Общая физика", value=4, student=student_1)
     mark_14 = Mark(class_name="Общая физика", value=5, student=student_2)
     mark_15 = Mark(class_name="Общая физика", value=4, student=student_6)
     mark_16 = Mark(class_name="Мат. анализ", value=4, student=student_4)
