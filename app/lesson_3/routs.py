@@ -1,6 +1,7 @@
-from flask import render_template
+from flask import render_template, redirect, url_for, flash
 from app import app, db
-from app.lesson_3.models import Student, Mark
+from app.lesson_3.models import Student, Mark, User
+from app.lesson_3.forms import RegisterForm
 
 
 @app.route("/lesson-3/")
@@ -20,7 +21,39 @@ def students():
 
 @app.route("/lesson-3/register", methods=["GET", "POST"])
 def register():
-    pass
+    form = RegisterForm()
+    if form.validate_on_submit():
+        first_name = form.first_name.data
+        last_name = form.last_name.data
+        birth_day = form.birthday.data
+        email = form.email.data
+        password = form.password.data
+        agreement = form.agreement.data
+
+        check_user = db.session.query(User).filter(User.email == email).first()
+        if check_user:
+            flash(
+                "Такой email уже зарегистрирован. Попробуйте другой!", category="danger"
+            )
+            return redirect(url_for("register"))
+
+        user = User(
+            first_name=first_name,
+            last_name=last_name,
+            birth_day=birth_day,
+            email=email,
+            agreement=agreement,
+        )
+        user.set_password(password)
+        db.session.add(user)
+        db.session.commit()
+        return render_template("lesson-3/welcome.html", user=user)
+    return render_template("lesson-3/register.html", caption="Регистрация", form=form)
+
+
+@app.route("/welcome/")
+def user_profile(user: str):
+    return render_template("lesson-3/welcome.html", user=user)
 
 
 @app.cli.command("init-db")

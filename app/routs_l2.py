@@ -1,5 +1,5 @@
 from flask import render_template, request, redirect, url_for, make_response
-from app import app
+from app import app, csrf
 
 
 @app.route("/lesson-2/")
@@ -10,6 +10,7 @@ def lesson_2():
 
 
 @app.route("/lesson-2/pow2/", methods=["GET", "POST"])
+@csrf.exempt
 def pow2():
     if request.method == "POST":
         result = None
@@ -32,6 +33,7 @@ def pow2():
 
 
 @app.route("/lesson_2/login/", methods=["GET", "POST"])
+@csrf.exempt
 def login():
     if request.method == "POST":
         name = request.form.get("name")
