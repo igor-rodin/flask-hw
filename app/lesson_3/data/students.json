@@ -1,0 +1,122 @@
+[
+  {
+    "first_name": "Иван",
+    "last_name": "Иванов",
+    "email": "ivan@example.com",
+    "group": 24,
+    "marks": [
+      {
+        "class_name": "Химия",
+        "value": 4
+      },
+      {
+        "class_name": "Биология",
+        "value": 3
+      },
+      {
+        "class_name": "Общая физика",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "first_name": "Сергей",
+    "last_name": "Петров",
+    "email": "petr@example.com",
+    "group": 24,
+    "marks": [
+      {
+        "class_name": "Химия",
+        "value": 4
+      },
+      {
+        "class_name": "Биология",
+        "value": 4
+      },
+      {
+        "class_name": "Общая физика",
+        "value": 5
+      }
+    ]
+  },
+  {
+    "first_name": "Лена",
+    "last_name": "Павлова",
+    "email": "lena@example.com",
+    "group": 32,
+    "marks": [
+      {
+        "class_name": "Теория поля",
+        "value": 4
+      },
+      {
+        "class_name": "История",
+        "value": 5
+      },
+      {
+        "class_name": "Мат. анализ",
+        "value": 5
+      }
+    ]
+  },
+  {
+    "first_name": "Игорь",
+    "last_name": "Павлов",
+    "email": "igor@example.com",
+    "group": 32,
+    "marks": [
+      {
+        "class_name": "Теория поля",
+        "value": 5
+      },
+      {
+        "class_name": "История",
+        "value": 4
+      },
+      {
+        "class_name": "Мат. анализ",
+        "value": 5
+      }
+    ]
+  },
+  {
+    "first_name": "Михаил",
+    "last_name": "Козлов",
+    "email": "mikle@example.com",
+    "group": 32,
+    "marks": [
+      {
+        "class_name": "Теория поля",
+        "value": 4
+      },
+      {
+        "class_name": "История",
+        "value": 5
+      },
+      {
+        "class_name": "Мат. анализ",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "first_name": "Вероника",
+    "last_name": "Иванова",
+    "email": "nika@example.com",
+    "group": 24,
+    "marks": [
+      {
+        "class_name": "Химия",
+        "value": 5
+      },
+      {
+        "class_name": "Биология",
+        "value": 4
+      },
+      {
+        "class_name": "Общая физика",
+        "value": 5
+      }
+    ]
+  }
+]
