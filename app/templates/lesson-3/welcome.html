@@ -1,0 +1,12 @@
+{% extends "base_bs.html" %}
+
+{% block content %}
+<div class="row col-12">
+    <div class="card card-body mb-3 mt-3 fs-4 text-center">
+        <p class="card-text">Добро пожаловать, {{user.first_name | capitalize}} на наш сайт!</p>
+    </div>
+</div>
+<div class="row  mt-4">
+    <a href="{{url_for('lesson_3')}}" class="link-primary">На главную страницу</a>
+</div>
+{% endblock %}

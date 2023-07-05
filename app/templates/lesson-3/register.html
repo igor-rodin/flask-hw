@@ -1,0 +1,31 @@
+{% extends 'base_bs.html' %}
+
+{% block content%}
+<div class="row mt-4">
+    <a href="{{url_for('lesson_3')}}" class="link-primary">Назад (к уроку 3)</a>
+</div>
+<div class="row col-12 mt-4">
+    <h1 class="h2 text-center m-4">{{caption}}</h1>
+    <form class="col-6 mx-auto" action="{{url_for('register')}}" method="post" novalidate>
+        {{ form.csrf_token }}
+        {% for field in form if field.name != 'csrf_token' and field.name != 'agreement' and field.name != 'register'%}
+        <div class="mb-3">
+            {{ field.label(class="form-label") }}
+            {{ field (class="form-control") }}
+        </div>
+        {% if field.errors %}
+        <ul class="alert alert-danger">
+            {% for error in field.errors %}
+            <li class="list-group-item">{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endfor %}
+        <div class="form-check mb-3">
+            {{ form.agreement(class="form-check-input") }}
+            {{ form.agreement.label(class="form-check-label") }}
+        </div>
+        {{form.register(class="btn btn-primary")}}
+    </form>
+</div>
+{% endblock %}

@@ -41,10 +41,3 @@ def get_product(id: int):
 @app.route("/about")
 def about():
     return render_template("about.html", title="О компании", menu_list=site_menu)
-
-
-# @app.route("/lesson-2")
-# def lesson_2():
-#     return render_template(
-#         "lesson-2/lesson-2.html", caption="Урок 2. Погружение во Flask"
-#     )
