@@ -30,12 +30,7 @@ if __name__ == "__main__":
         "https://gb.ru/",
         "https://ya.ru/",
         "https://www.python.org/",
-        "https://habr.com/ru/all/",
-        "https://www.google.ru/",
-        "https://gb.ru/",
-        "https://ya.ru/",
-        "https://www.python.org/",
-        "https://habr.com/ru/all/",
+        "https://dev.to/listings",
     ]
 
     urls_img = [
@@ -47,4 +42,4 @@ if __name__ == "__main__":
         "https://habrastorage.org/r/w780/getpro/habr/upload_files/318/e82/980/318e82980552281a11475db39f1f5932.jpeg",
     ]
 
-    multiproces_load(urls_img, file_type=FileType.IMAGE, target_dir="img")
+    multiproces_load(urls, file_type=FileType.TEXT, target_dir="tmp")
