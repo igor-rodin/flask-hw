@@ -17,7 +17,7 @@ def make_file_name_(
     url: str, file_type: FileType = FileType.TEXT, target_dir: str = "."
 ) -> str:
     """
-    Генерирует имя файла для сохранения на диск
+    Формирует имя файла для сохранения на диск
     """
     abs_path_to_dir = Path().absolute() / Path(target_dir)
     if not abs_path_to_dir.is_dir():
@@ -42,17 +42,18 @@ def load_file_by_url(
     func_start_time = time.time()
 
     response = requests.get(url)
-
+    encoding = None
+    mode = "w"
     match file_type:
         case FileType.TEXT:
             data = response.text
-            mode = "w"
+            encoding = "utf-8"
         case FileType.IMAGE:
             data = response.content
             mode = "wb"
 
     file_name = make_file_name_(url, file_type, target_dir)
-    with open(file_name, mode=mode) as f:
+    with open(file_name, mode=mode, encoding=encoding) as f:
         f.write(data)
     print(
         f"Data {url} saved to {file_name} in {time.time() - func_start_time:0.2f} sec."
@@ -69,25 +70,39 @@ async def aload_file_by_url(
     async with aiohttp.ClientSession() as session:
         func_start_time = time.time()
         async with session.get(url) as response:
+            encoding = None
+            mode = "w"
             match file_type:
                 case FileType.TEXT:
                     data = await response.text()
-                    mode = "w"
+                    encoding = "utf-8"
                 case FileType.IMAGE:
                     data = await response.read()
                     mode = "wb"
 
             file_name = make_file_name_(url, file_type, target_dir)
-            async with aiofiles.open(file_name, mode=mode) as f:
+            async with aiofiles.open(file_name, mode=mode, encoding=encoding) as f:
                 await f.write(data)
             print(
                 f"Data {url} saved to {file_name} in {time.time() - func_start_time:0.2f} sec."
             )
 
 
-async def main():
+def get_urls_from_file(file_path: str) -> list[str]:
+    """
+    Возвращает список url для загрузки из файла file_path
+    """
+    file_name = Path().absolute() / Path(file_path)
+    if not file_name.is_file():
+        raise FileNotFoundError(f"Файл {file_name} не существует")
+    with open(file_name, mode="r", encoding="utf-8") as f:
+        urls = f.read().split()
+    return urls
+
+
+async def test():
     url_1 = "https://www.geeksforgeeks.org/wp-content/uploads/gq/2014/01/QuickSort2.png"
-    url_2 = "https://habr.com/ru/all/"
+    url_2 = "https://developer.android.com/design"
     tasks = []
     t1 = asyncio.create_task(
         aload_file_by_url(url_1, file_type=FileType.IMAGE, target_dir="tmp")
@@ -101,5 +116,5 @@ async def main():
 start_time = time.time()
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(test())
     print(f"All done in {time.time() - start_time:0.2f} sec.")

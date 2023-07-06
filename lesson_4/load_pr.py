@@ -21,7 +21,7 @@ def multiproces_load(
     for process in processes:
         process.join()
 
-    print(f"All loads in {time.time() - start_time:0.2f} sec.")
+    print(f"Общее время загрузки {time.time() - start_time:0.2f} сек.")
 
 
 if __name__ == "__main__":

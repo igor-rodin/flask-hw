@@ -21,7 +21,7 @@ def thread_load(
     for thread in threads:
         thread.join()
 
-    print(f"All loads in {time.time() - start_time:0.2f} sec.")
+    print(f"Общее время загрузки {time.time() - start_time:0.2f} сек.")
 
 
 if __name__ == "__main__":

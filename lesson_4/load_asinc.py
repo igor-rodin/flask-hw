@@ -15,7 +15,7 @@ async def async_load(
         task = asyncio.create_task(aload_file_by_url(url, file_type, target_dir))
         tasks.append(task)
     await asyncio.gather(*tasks)
-    print(f"All loads in {time.time() - start_time:0.2f} sec.")
+    print(f"Общее время загрузки {time.time() - start_time:0.2f} сек.")
 
 
 if __name__ == "__main__":
