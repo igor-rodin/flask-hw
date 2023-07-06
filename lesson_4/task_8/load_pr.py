@@ -40,6 +40,12 @@ if __name__ == "__main__":
         "https://img.freepik.com/free-photo/children-s-fantasy-tale-with-bison_23-2150165796.jpg",
         "https://habrastorage.org/r/w780/getpro/habr/upload_files/9f2/693/0b3/9f26930b3a1ac0050181c9eb4b3da366.jpeg",
         "https://habrastorage.org/r/w780/getpro/habr/upload_files/318/e82/980/318e82980552281a11475db39f1f5932.jpeg",
+        "https://img.freepik.com/premium-photo/marbled-greek-goddess-with-gold-headdress_52683-102859.jpg",
+        "https://img.freepik.com/premium-photo/realistic-mouth-lips-with-melting-effect_52683-105398.jpg",
+        "https://img.freepik.com/premium-photo/toy-rabbit-jacket-riding-mini-motorcycle-created-with-generative-ai-technology_746009-172.jpg",
+        "https://img.freepik.com/free-photo/children-s-fantasy-tale-with-bison_23-2150165796.jpg",
+        "https://habrastorage.org/r/w780/getpro/habr/upload_files/9f2/693/0b3/9f26930b3a1ac0050181c9eb4b3da366.jpeg",
+        "https://habrastorage.org/r/w780/getpro/habr/upload_files/318/e82/980/318e82980552281a11475db39f1f5932.jpeg",
     ]
 
-    multiproces_load(urls, file_type=FileType.TEXT, target_dir="tmp")
+    multiproces_load(urls_img, file_type=FileType.IMAGE, target_dir="img")
