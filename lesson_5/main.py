@@ -1,17 +1,106 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.templating import Jinja2Templates
 import uvicorn
-from pydantic import BaseModel, EmailStr
-from typing import Optional
 from tasks.model import Task, TaskModel
+from users.model import UserOut, User, UserIn
 import tasks.db_fake as dbtask
+import users.db_fake as dbusers
 
-app = FastAPI(title="Lesson 5 App")
+app = FastAPI(title="Урок 5. Знакомство с FastAPI")
+app.mount("/static", StaticFiles(directory="lesson_5/public"), name="static")
+templates = Jinja2Templates(directory="lesson_5/public/templates")
+
+"""
+    Задание №6
+    API для работы с пользователями
+"""
+
+
+@app.get("/", response_class=RedirectResponse, tags=["Пользователи"], summary="Главная")
+async def index():
+    return "/users"
+
+
+@app.get(
+    "/users",
+    response_class=HTMLResponse,
+    tags=["Пользователи"],
+    summary="Получение списка пользователей",
+)
+async def get_users(request: Request):
+    users = dbusers.get_users()
+    return templates.TemplateResponse(
+        "users.html", {"request": request, "users": users, "caption": "Пользователи"}
+    )
+
+
+@app.post(
+    "/users",
+    response_model=UserOut,
+    tags=["Пользователи"],
+    summary="Создать пользователя",
+)
+async def create_user(user: UserIn):
+    if dbusers.user_exist(user.email):
+        raise HTTPException(
+            status_code=409, detail="Данный email уже зарегистриован. Выберите другой"
+        )
+    new_user = User(**user.model_dump(exclude="password"), password_hash="")
+    new_user.set_password(user.password)
+    dbusers.add_user(new_user)
+    return UserOut(**new_user.model_dump(exclude=["id", "password_hash"]))
+
+
+@app.get(
+    "/users/{user_email}",
+    response_model=UserOut,
+    tags=["Пользователи"],
+    summary="Получить информацию о пользователе по его email",
+)
+async def get_user(user_email: str):
+    user = dbusers.get_user_by_email(user_email)
+    if user:
+        return UserOut(**user.model_dump(exclude=["id", "password_hash"]))
+    raise HTTPException(status_code=404, detail="Пользователь не найден")
+
+
+@app.put(
+    "/users/{user_email}",
+    tags=["Пользователи"],
+    response_model=UserOut,
+    summary="Обновить информацию о пользователе по его email",
+)
+async def update_user(user_email: str, user: UserIn):
+    if not dbusers.user_exist(user_email):
+        raise HTTPException(status_code=404, detail="Пользователь не найден")
+    if dbusers.user_exist(user.email) and user_email != user.email:
+        raise HTTPException(
+            status_code=409, detail="Данный email уже зарегистриован. Выберите другой"
+        )
+    new_data = User(**user.model_dump(), password_hash="")
+    new_data.set_password(user.password)
+    updated = dbusers.update_user(user_email, new_data)
+
+    return updated
+
+
+@app.delete(
+    "/users/{user_email}",
+    response_model=UserOut,
+    tags=["Пользователи"],
+    summary="Удалить пользователе по его email",
+)
+async def delete_user(user_email: str):
+    if dbusers.user_exist(user_email):
+        return dbusers.del_user(user_email)
+    raise HTTPException(status_code=404, detail="Пользователь не найден")
 
 
 """
-
-email: EmailStr = Field(..., description="Email address of the user")
-    password: str = Field(..., min_length=8, regex="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).*$", description="Password of the user")
+    Задание №7
+    API для управления списком задач
 """
 
 
