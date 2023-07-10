@@ -45,7 +45,6 @@ def add_user(user: User) -> None:
 
 def update_user(email: str, user: User) -> UserOut:
     updated_user = [item for item in users if item.get("email") == email]
-    # map()
     updated_user[0].update({"name": user.name})
     updated_user[0].update({"email": user.email})
     updated_user[0].update({"password_hash": user.password_hash})

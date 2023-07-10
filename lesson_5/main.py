@@ -1,3 +1,4 @@
+import uuid
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import HTMLResponse, RedirectResponse
@@ -31,6 +32,7 @@ async def index():
 )
 async def get_users(request: Request):
     users = dbusers.get_users()
+
     return templates.TemplateResponse(
         "users.html", {"request": request, "users": users, "caption": "Пользователи"}
     )
@@ -47,9 +49,12 @@ async def create_user(user: UserIn):
         raise HTTPException(
             status_code=409, detail="Данный email уже зарегистриован. Выберите другой"
         )
-    new_user = User(**user.model_dump(exclude="password"), password_hash="")
+    new_user = User(
+        **user.model_dump(exclude="password"), id=uuid.uuid4(), password_hash=""
+    )
     new_user.set_password(user.password)
     dbusers.add_user(new_user)
+
     return UserOut(**new_user.model_dump(exclude=["id", "password_hash"]))
 
 

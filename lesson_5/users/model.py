@@ -29,7 +29,7 @@ class UserIn(UserOut):
 
 
 class User(UserOut):
-    id: uuid.UUID = uuid.uuid4()
+    id: uuid.UUID
 
     password_hash: str
 
