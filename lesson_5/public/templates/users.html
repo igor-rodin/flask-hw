@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<div class="row col-12 mt-4 users-wrapper">
+    <div class="row col-12 users">
+        <table class="table table-striped">
+            <caption class="caption-top h1">{{caption}}</caption>
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for data in users %}
+                <tr>
+                    <td scope="row"> {{data.num}} </td>
+                    <td scope="row">{{data.user.name}}</td>
+                    <td scope="row">{{data.user.email}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row col-6">
+        <a href="#" class="btn btn-primary">Добавить пользователя</a>
+    </div>
+</div>
+
+</div>
+{% endblock %}
