@@ -24,10 +24,13 @@ class OrderUpdate(BaseModel):
     products_amount: Optional[int] = Field(default=None)
 
 
-class Order(BaseModel):
+class OrderOut(BaseModel):
     id: int
-    user: User
     product: Product
     products_amount: int
     order_date: datetime
     status: OrderStatus
+
+
+class Order(OrderOut):
+    user: User

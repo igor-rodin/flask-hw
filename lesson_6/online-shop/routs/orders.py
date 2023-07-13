@@ -2,14 +2,14 @@ from fastapi import APIRouter, Query, HTTPException
 from models.products import Product
 from models.users import User
 from models.order_status import OrderStatus
-from models.orders import Order, OrderIn, OrderUpdate
+from models.orders import Order, OrderIn, OrderUpdate, OrderOut
 from database import products, orders, order_status, users, db
 
 router = APIRouter()
 
 
-def parse_order_row_(order) -> Order:
-    res = Order(
+def parse_order_row_(order) -> Order | OrderOut:
+    return Order(
         id=order.id,
         products_amount=order.products_amount,
         order_date=order.order_date,
@@ -27,7 +27,6 @@ def parse_order_row_(order) -> Order:
         ),
         status=OrderStatus(id=order.order_status, status_name=order.status_name),
     )
-    return res
 
 
 @router.get("/orders", response_model=list[Order], response_model_exclude_none=True)
