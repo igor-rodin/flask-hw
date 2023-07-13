@@ -1,0 +1,40 @@
+[
+  {
+    "first_name": "Игорь",
+    "last_name": "Родин",
+    "email": "user@example.com",
+    "id": 1
+  },
+  {
+    "first_name": "Лена",
+    "last_name": "Павлова",
+    "email": "pavlova@example.com",
+    "id": 2
+  },
+
+  {
+    "name": "Кофе",
+    "description": "The best, 1кг",
+    "price": "1250.20",
+    "id": 1
+  },
+  {
+    "name": "Чай",
+    "description": "Китайский, Пу-эр - 200г",
+    "price": "680.00",
+    "id": 2
+  },
+  {
+    "name": "Телефон",
+    "description": "iPhone 14 MaxPro",
+    "price": "122000.00",
+    "id": 3
+  },
+
+  [
+    { "name": "Принят", "id": 1 },
+    { "name": "Собирается", "id": 2 },
+    { "name": "Доставляется", "id": 3 },
+    { "name": "Выполнен", "id": 4 }
+  ]
+]
