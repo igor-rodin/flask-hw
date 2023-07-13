@@ -44,8 +44,7 @@ async def get_orders(
         .limit(count)
     )
     join_res = await db.fetch_all(query=join_query)
-    ordersOut = list(map(parse_order_row_, join_res))
-    return ordersOut
+    return list(map(parse_order_row_, join_res))
 
 
 @router.post("/orders", response_model=Order)
@@ -106,4 +105,4 @@ async def delete_order(order_id: int):
     res = await db.execute(query=query)
     if res > 0:
         return {"message": "Order was successfully deleted"}
-    raise HTTPException(status_code=404, detail="Product not found")
+    raise HTTPException(status_code=404, detail="Order not found")

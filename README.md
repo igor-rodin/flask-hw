@@ -2,6 +2,28 @@
 
 ## Урок 6. Дополнительные возможности FastAPI
 
+Папка урока -  ```lesson_6```
+
+```lesson_6/mongodb_todo``` -  Список дел c MogoDB (Задача 5)
+
+```lesson_6/online-shop``` -  База данных для интернет-магазина (Задача 6)
+
+1. Установка
+
+   ```bash
+      pip instal -r requirements
+   ```
+
+2. Запуск сервера
+
+   ```bash
+      python lesson_6/mongodb_todo/main.py
+   ```
+
+   ```bash
+      python lesson_6/online-shop/main.py
+   ```
+
 ## Урок 5. Знакомство с FastAPI
 
 Папка урока -  ```lesson_5```
